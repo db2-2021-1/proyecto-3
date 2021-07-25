@@ -15,7 +15,7 @@ def get_files(directory: str) -> List[str]:
 def point2box(v: np.ndarray) -> np.ndarray:
     return np.concatenate((v, v), axis=None)
 
-def create_index(name: str, dimensions: int, files: List[str]) -> Index:
+def create_index(name: str, dimensions: int, files: List) -> Index:
     p = Property()
     p.dimension = dimensions
     p.dat_extension = "data"
