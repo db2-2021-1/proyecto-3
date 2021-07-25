@@ -126,3 +126,6 @@ dmypy.json
 
 *.jpg
 *.png
+
+# miunmn python env
+env
