@@ -129,3 +129,6 @@ dmypy.json
 
 # miunmn python env
 env
+*.data
+*.index
+files
