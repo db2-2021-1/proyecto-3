@@ -27,7 +27,6 @@ def create_index(name: str, dimensions: int, files: List[str]) -> Index:
     for file in files:
         for face in face_encodings(load_image_file(file)):
             rtindex.insert(i, point2box(face))
-            # TODO i -> file map
         i += 1
 
     return rtindex

@@ -126,3 +126,7 @@ dmypy.json
 
 *.jpg
 *.png
+
+*.data
+*.index
+files
