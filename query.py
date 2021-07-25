@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from face_recognition.api import load_image_file, face_encodings
-from glob import glob
 from pickle import load
 from rtree.index import Index, Property
 from sys import argv
@@ -22,6 +21,13 @@ def load_index(name: str, dimensions: int) -> Index:
 
     return rtindex
 
+def knn_search(index: Index, face: np.ndarray, k: int) -> List[int]:
+    return [
+        id
+        for id in index.nearest(point2box(face), k)
+        if isinstance(id, int)
+    ]
+
 def main() -> None:
     if(len(argv) < 2):
         exit(1)
@@ -33,10 +39,8 @@ def main() -> None:
 
     face = face_encodings(load_image_file(argv[1]))[0]
 
-    for id in index.nearest(point2box(face), 1):
-        if isinstance(id, int):
-            print(files[id])
-
+    for id in knn_search(index, face, 2):
+        print(files[id])
 
 if __name__ == "__main__":
     main()
