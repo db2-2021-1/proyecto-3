@@ -2,14 +2,15 @@
 
 from face_recognition.api import load_image_file, face_encodings
 from glob import glob
+from pickle import dump
+from rtree.index import Index, Property
 from sys import argv
 from typing import List
-from rtree.index import Index, Property
 
 import numpy as np
 
-def get_files() -> List[str]:
-    return glob(f'{argv[1]}/**/*.jpg', recursive=True)
+def get_files(directory: str) -> List[str]:
+    return glob(f'{directory}/**/*.jpg', recursive=True)
 
 def point2box(v: np.ndarray) -> np.ndarray:
     return np.concatenate((v, v), axis=None)
@@ -35,7 +36,11 @@ def main() -> None:
     if(len(argv) < 2):
         exit(1)
 
-    create_index('rtree', 128, get_files())
+    files = get_files(argv[1])
+    create_index('rtree', 128, files)
+
+    with open("files", "wb") as w:
+        dump(files, w)
 
 if __name__ == "__main__":
     main()
