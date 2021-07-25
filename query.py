@@ -11,6 +11,9 @@ import numpy as np
 def point2box(v: np.ndarray) -> np.ndarray:
     return np.concatenate((v, v), axis=None)
 
+def bounding_box(v: np.ndarray, r: float) -> np.ndarray:
+    return np.concatenate((v-(r/2), v+(r/2)), axis=None)
+
 def load_index(name: str, dimensions: int) -> Index:
     p = Property()
     p.dimension = dimensions
@@ -25,6 +28,13 @@ def knn_search(index: Index, face: np.ndarray, k: int) -> List[int]:
     return [
         id
         for id in index.nearest(point2box(face), k)
+        if isinstance(id, int)
+    ]
+
+def range_search(index: Index, face: np.ndarray, r: float) -> List[int]:
+    return [
+        id
+        for id in index.intersection(bounding_box(face, r))
         if isinstance(id, int)
     ]
 
