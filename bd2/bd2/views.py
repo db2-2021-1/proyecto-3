@@ -1,3 +1,6 @@
+import json
+import os
+import glob
 from django.shortcuts import render
 from .forms import ImageForm
 
@@ -10,8 +13,10 @@ def image_upload_view(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # Get the current instance object to display in the template
+            imagefilename = glob.glob("./media/images/*")[0]
             message = "Subido con éxito"
+            os.remove(imagefilename)
+            print(imagefilename, " eliminado")
             return render(request, 'dashboard.html', {'message': message})
     else:
         form = ImageForm()
