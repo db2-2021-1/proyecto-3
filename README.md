@@ -1,5 +1,4 @@
 # Proyecto 3: Base de Datos Multimedia
-# Proyecto 3: Base de Datos Multimedia
 ## Objetivos
 * Usando la librería _face recognition_ poder construir un índice RTree de vectores representativos de imágenes.
 * Implementar el algoritmo de búsqueda KNN para el RTree. 
@@ -11,4 +10,5 @@
 ### Búsqueda KNN
 ### Búsqueda por rango
 ## Análisis experimental
+![KNN RTree vs Secuencial](https://imgur.com/a/qlsrpQ1)
 ## Front-End
