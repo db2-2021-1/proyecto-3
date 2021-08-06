@@ -28,14 +28,14 @@ def knn_search(index: Index, face: np.ndarray, k: int) -> List[str]:
     return [
         n.object
         for n in index.nearest(point2box(face), k, objects=True)
-        if isinstance(n.object, str)
+        if n is not None and isinstance(n.object, str)
     ]
 
 def range_search(index: Index, face: np.ndarray, r: float) -> List[str]:
     return [
         n.object
         for n in index.intersection(bounding_box(face, r), objects=True)
-        if isinstance(n.object, str)
+        if n is not None and isinstance(n.object, str)
     ]
 
 def main() -> None:
