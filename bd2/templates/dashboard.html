@@ -83,7 +83,7 @@
 				{% if imagelist %}
 					{% for image in imagelist %}
 					<h3>Succesfully uploaded : {{image.title}}</h3>
-					<img src="static/"{image} alt="connect" style="max-height:300px">
+					<img src="{{ image }}" alt="connect" style="max-height:300px">
 					{% endfor %}
 				{% endif %}
 			</div>

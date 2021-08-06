@@ -30,7 +30,7 @@ def image_upload_view(request):
                 print("id: ", id)
                 image = glob.glob("./static/lfw/"+id+"/*")
                 print(image)
-                imagelist.append(image)
+                imagelist.append(image[0])
             os.remove(imagefilename)
             print(imagefilename, " eliminado")
             return render(request, 'dashboard.html',  {'form': form, 'imagelist': imagelist})
