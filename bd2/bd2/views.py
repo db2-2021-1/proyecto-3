@@ -20,19 +20,16 @@ def image_upload_view(request):
             form.save()
             imagefilename = glob.glob("./media/images/*")[0]
             message = "Subido con éxito"
-            
-
             face = face_encodings(load_image_file(imagefilename))[0]
-            
-            lista_rangesearch = knn_search(index, face, 3)
+            lista_rangesearch = range_search(index, face, 3.0)
             imagelist = []
+            lista_rangesearch = list(dict.fromkeys(lista_rangesearch))
             for id in lista_rangesearch:
-                print("id: ", id)
-                image = glob.glob("./static/lfw/"+id+"/*")
-                print(image)
-                imagelist.append(image[0])
+                images = glob.glob("./static/lfw/"+id+"/*")
+                if len(images)>0:
+                    print(images[0])
+                    imagelist.append(images[0])
             os.remove(imagefilename)
-            print(imagefilename, " eliminado")
             return render(request, 'dashboard.html',  {'form': form, 'imagelist': imagelist})
     else:
         form = ImageForm()
