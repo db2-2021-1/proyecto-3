@@ -18,13 +18,22 @@ def image_upload_view(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            data = form.cleaned_data
+            print(data['title'])
+            #knn 
+            #range
+
             imagefilename = glob.glob("./media/images/*")[0]
             message = "Subido con éxito"
             face = face_encodings(load_image_file(imagefilename))[0]
-            lista_rangesearch = range_search(index, face, 3.0)
+            result = []
+            if data['title']=="knn" :            
+                result = knn_search(index, face, 3)
+            elif data['title']=="range":
+                result = range_search(index, face, 3.0)
             imagelist = []
-            lista_rangesearch = list(dict.fromkeys(lista_rangesearch))
-            for id in lista_rangesearch:
+            result = list(dict.fromkeys(result))
+            for id in result:
                 images = glob.glob("./static/lfw/"+id+"/*")
                 if len(images)>0:
                     print(images[0])

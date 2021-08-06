@@ -23,31 +23,8 @@
 								src="{% static 'images/logos/dashboard-logo-white.svg' %}" alt=""></a>
 					</div>
 					<ul class="uk-navbar-nav uk-visible@m">
-						<li><a href="#">Accounts</a></li>
-						<li>
-							<a href="#">Settings <span data-uk-icon="icon: triangle-down"></span></a>
-							<div class="uk-navbar-dropdown">
-								<ul class="uk-nav uk-navbar-dropdown-nav">
-									<li class="uk-nav-header">YOUR ACCOUNT</li>
-									<li><a href="#"><span data-uk-icon="icon: info"></span> Summary</a></li>
-									<li><a href="#"><span data-uk-icon="icon: refresh"></span> Edit</a></li>
-									<li><a href="#"><span data-uk-icon="icon: settings"></span> Configuration</a></li>
-									<li class="uk-nav-divider"></li>
-									<li><a href="#"><span data-uk-icon="icon: image"></span> Your Data</a></li>
-									<li class="uk-nav-divider"></li>
-									<li><a href="#"><span data-uk-icon="icon: sign-out"></span> Logout</a></li>
-								</ul>
-							</div>
-						</li>
+						<li><a href="/">Home</a></li>
 					</ul>
-					<div class="uk-navbar-item uk-visible@s">
-						<div class="uk-search uk-search-default">
-							<span data-uk-search-icon></span>
-							<input id="query" class="uk-search-input search-field" type="search"
-								placeholder="Ingrese para buscar!">
-						</div>
-						<button class="uk-button uk-button-default" onclick="buscar()">BUSCAR</button>
-					</div>
 				</div>
 				<div class="uk-navbar-right">
 					<ul class="uk-navbar-nav">
@@ -71,20 +48,22 @@
 
 	</aside>
 	<!-- LEFT BAR -->
-	<div id="content" data-uk-height-viewport="expand: true">
-		<!--<div id="results" style="padding-left: 30%"></div>-->
+	<div id="content" style="padding-left: 150px;" data-uk-height-viewport="expand: true">
 		<form method="post" enctype="multipart/form-data">
+			<h2>Ingrese knn o range</h2>
+
 			{% csrf_token %}
 			{{ form.as_p }}
-			<button type="submit">Upload</button>
+			<button class="uk-button uk-button-default" type="submit">Consultar</button>
 		</form>
-		<div id="content" style="margin-left: 30%" data-uk-height-viewport="expand: true">
-			<div id="results" style="padding-left: 30%">
+		<div style="margin-left: 30%" data-uk-height-viewport="expand: true">
+			<div id="results" style="padding-bottom:150px">
 				{% if imagelist %}
-					{% for image in imagelist %}
-					<h3>Succesfully uploaded : {{image.title}}</h3>
-					<img src="{{ image }}" alt="connect" style="max-height:300px">
-					{% endfor %}
+				<h2>Resultados: </h2>
+				{% for image in imagelist %}
+				<h3>Imagen</h3>
+				<img src="{{ image }}" alt="connect" style="max-height:300px">
+				{% endfor %}
 				{% endif %}
 			</div>
 		</div>
