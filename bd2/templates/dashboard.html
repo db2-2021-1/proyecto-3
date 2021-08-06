@@ -78,9 +78,16 @@
 			{{ form.as_p }}
 			<button type="submit">Upload</button>
 		</form>
-		{% if message %}
-		message
-		{% endif %}
+		<div id="content" style="margin-left: 30%" data-uk-height-viewport="expand: true">
+			<div id="results" style="padding-left: 30%">
+				{% if imagelist %}
+					{% for image in imagelist %}
+					<h3>Succesfully uploaded : {{image.title}}</h3>
+					<img src="static/"{image} alt="connect" style="max-height:300px">
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
 	</div>
 
 	<!-- /OFFCANVAS -->

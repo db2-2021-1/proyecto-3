@@ -49,8 +49,5 @@ def main() -> None:
     lista_rangesearch = range_search(index, face, 3.0)
     #lista_knnsearch = knn_search(index, face, 3)
 
-    for id in lista_rangesearch:
-        print(id)
-
 if __name__ == "__main__":
     main()
