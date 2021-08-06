@@ -7,8 +7,9 @@
 * Construir una aplicación front end para poder usar el motor de búsqueda con facilidad.
 ## Implementación
 ### Construcción del índice RTree
+La construcción del índice se pudo lograr apoyado de la librería
 ### Búsqueda KNN
 ### Búsqueda por rango
 ## Análisis experimental
-![KNN RTree vs Secuencial](https://imgur.com/a/qlsrpQ1)
+![KNN RTree vs Secuencial](images/image1.PNG)
 ## Front-End
