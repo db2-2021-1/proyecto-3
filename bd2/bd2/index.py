@@ -26,7 +26,7 @@ def create_index(name: str, dimensions: int, files: List) -> Index:
     i = 0
     for file in files:
         for face in face_encodings(load_image_file(file)):
-            rtindex.insert(i, point2box(face))
+            rtindex.insert(i, point2box(face), obj = file.split("/")[-2])
         i += 1
 
     return rtindex
@@ -37,9 +37,6 @@ def main() -> None:
 
     files = get_files(argv[1])
     create_index("rtree", 128, files)
-
-    with open("files", "wb") as w:
-        dump(files, w)
 
 if __name__ == "__main__":
     main()
