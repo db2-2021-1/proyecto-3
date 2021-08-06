@@ -8,7 +8,7 @@
 ## Implementación
 ### Construcción del índice RTree
 La construcción del índice se pudo lograr apoyado de la librería _RTree_ de Python la que nos proporciona con la estructura de datos que soporta _N-Dimension Arrays_ (_ndarray_) de la librería _numpy_. Las imágenes son interpretadas en _face encodings_ que son _ndarrays_ de 128 dimensiones.
-```javascript
+```python
 i = 0
 for file in files:
 	for face in face_encodings(load_image_file(file)):
@@ -18,7 +18,7 @@ for file in files:
 Se itera por cada carpeta de la carpeta root indicada como parámetro encontrando todas las imágenes y añadiéndolas al RTree después de ser transformadas en _face encodings_.
 ### Búsqueda KNN
 La estructura de datos RTree cuenta con una función que facilita conseguir el elemento más cercano que es la función _nearest()_, el cual devuelve k elementos más cercanos a un _ndarray_.
-```
+```python
 def knn_search(index: Index, face: np.ndarray, k: int) -> List[str]:
 	return [
 		n.object
