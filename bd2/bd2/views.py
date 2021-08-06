@@ -3,10 +3,15 @@ import os
 import glob
 from django.shortcuts import render
 from .forms import ImageForm
+from .query import knn_search, range_search, load_index
+from face_recognition.api import load_image_file, face_encodings
+
+index = load_index("rtree", 128)
+
 
 def mainpage(request):
   return render(request,'index.html')
-
+            
 def image_upload_view(request):
     """Process images uploaded by users"""
     if request.method == 'POST':
@@ -15,6 +20,14 @@ def image_upload_view(request):
             form.save()
             imagefilename = glob.glob("./media/images/*")[0]
             message = "Subido con éxito"
+            
+
+            face = face_encodings(load_image_file(imagefilename))[0]
+            
+            lista_rangesearch = knn_search(index, face, 3)
+            print(lista_rangesearch)
+            for id in lista_rangesearch:
+                print(id)
             os.remove(imagefilename)
             print(imagefilename, " eliminado")
             return render(request, 'dashboard.html', {'message': message})

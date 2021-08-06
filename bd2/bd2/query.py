@@ -24,33 +24,33 @@ def load_index(name: str, dimensions: int) -> Index:
 
     return rtindex
 
-def knn_search(index: Index, face: np.ndarray, k: int) -> List[int]:
+def knn_search(index: Index, face: np.ndarray, k: int) -> List[str]:
     return [
-        id
-        for id in index.nearest(point2box(face), k)
-        if isinstance(id, int)
+        n.object
+        for n in index.nearest(point2box(face), k, objects=True)
+        if isinstance(n.object, str)
     ]
 
-def range_search(index: Index, face: np.ndarray, r: float) -> List[int]:
+def range_search(index: Index, face: np.ndarray, r: float) -> List[str]:
     return [
-        id
-        for id in index.intersection(bounding_box(face, r))
-        if isinstance(id, int)
+        n.object
+        for n in index.intersection(bounding_box(face, r), objects=True)
+        if isinstance(n.object, str)
     ]
 
 def main() -> None:
     if(len(argv) < 2):
         exit(1)
 
-    with open("files", "rb") as r:
-        files:List[str] = load(r)
-
     index = load_index("rtree", 128)
 
     face = face_encodings(load_image_file(argv[1]))[0]
+    
+    lista_rangesearch = range_search(index, face, 3.0)
+    #lista_knnsearch = knn_search(index, face, 3)
 
-    for id in knn_search(index, face, 2):
-        print(files[id])
+    for id in lista_rangesearch:
+        print(id)
 
 if __name__ == "__main__":
     main()
