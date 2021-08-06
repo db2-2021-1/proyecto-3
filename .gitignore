@@ -126,7 +126,7 @@ dmypy.json
 .pyre/
 
 *.jpg
-*.png
+.idea
 
 # miunmn python env
 env
