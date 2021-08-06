@@ -1,4 +1,9 @@
 # Proyecto 3: Base de Datos Multimedia
+## Integrantes
+* Alberto Oporto
+* Esteban Príncipe
+* Andrés Lostaunau
+
 ## Objetivos
 * Usando la librería _face recognition_ poder construir un índice RTree de vectores representativos de imágenes.
 * Implementar el algoritmo de búsqueda KNN para el RTree. 
